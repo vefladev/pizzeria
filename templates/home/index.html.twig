@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue !{% endblock %}
+
+{% block body %}
+    <div class="hero-section">
+        <div class=" container d-flex flex-column">
+            <h1>Mapizz'</h1>
+            <p class="my-4">Pizza ipsum dolor amet chicken wing extra sauce philly steak, red onions string cheese
+                sauteed onions.</p>
+            <div class="text-center">
+                <a href="/#order" class="btn btn-lg btn-light mt-4">Commander <i
+                            class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 class="text-center my-4" id="order">Commandez votre pizza en quelques clics !</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4 my-2">
+            {% for product in products %}
+                <div class="col">
+                    <div class="card card-home">
+                        <img src="{{ product.image }}" class="card-img" alt="image de {{ product.name }}">
+                        <div class="card-body">
+
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <div class="card-text">
+                                <p>
+                                    {{ product.description | raw }}
+                                </p>
+                            </div>
+                            <a class="btn btn-light" href="{{ path('add_cart', {'id': product.id}) }}">Ajouter <i class="fas fa-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

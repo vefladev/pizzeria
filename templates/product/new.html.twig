@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout de produit{% endblock %}
+
+{% block body %}
+<div class="container mb-4">
+    <h1 class="text-center mt-4 mb-2">Ajouter un produit</h1>
+    <div class="d-flex justify-content-end my-2">
+        <a href="{{ path('product_index') }}" class="btn btn-warning">Retour</a>
+    </div>
+    {{ include('product/_form.html.twig') }}
+
+</div>
+{% endblock %}

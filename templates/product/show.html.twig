@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <h1>{{ product.name }}</h1>
+
+        <div class="d-flex justify-content-end my-2">
+            <a href="{{ path('product_index') }}" class="btn btn-warning">Retour</a>
+            <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-light mx-2">Modifier</a>
+            {{ include('product/_delete_form.html.twig') }}
+        </div>
+
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ product.category }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    {% if product.image starts with 'img' %}
+                        <img src="/{{ product.image }}" alt="image de {{ product.name }}" style="max-width: 50px;"/>
+                    {% else %}
+                        <img src="{{ product.image }}" alt="image de {{ product.name }}" style="max-width: 50px;"/>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

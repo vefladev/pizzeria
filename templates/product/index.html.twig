@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <h1 class="text-center">Gestion des produits</h1>
+        <div class="d-flex justify-content-end my-2">
+            <a href="{{ path('product_new') }}" class="btn btn-light">Créer un produit</a>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Catégorie</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th class="text-center">Image</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td class="w-50">{{ product.description | raw }}</td>
+                    <td>{{ product.price }}</td>
+                    <td class="text-center">
+                        {% if product.image starts with 'img' %}
+                            <img src="/{{ product.image }}" alt="image de {{ product.name }}" style="max-width: 50px;"/>
+                        {% else %}
+                            <img src="{{ product.image }}" alt="image de {{ product.name }}" style="max-width: 50px;"/>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="w-100 d-flex justify-content-center">
+                            <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-light m-1">Voir</a>
+                            <a href="{{ path('product_edit', {'id': product.id}) }}"
+                               class="btn btn-warning m-1">Modifier</a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun produit trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
